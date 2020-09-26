@@ -1,32 +1,26 @@
-(function () {
-    // body of the function
-
-    function getQuote() {
-        fetch('quotes.json')
-        .then(response => {
-            return response.json()
-        })
-        .then(data => {
-            
-            function randomQuote(){
-               return Math.floor(Math.random() * Math.floor(data.length))    
-            }
-            
-            let randomQuoteNumber = randomQuote();            
-            document.getElementById('quoteText').innerHTML = " " + data[randomQuoteNumber].quoteText + " ";
-            if ( !data[randomQuoteNumber].quoteAuthor.length == 0) {
-                document.getElementById('quoteAuthor').innerHTML = '&mdash; ' + data[randomQuoteNumber].quoteAuthor;            
-            } else {
-                document.getElementById('quoteAuthor').innerHTML = '&mdash; ' + 'Unknown Author';
-            }
-            
-            
-        });
-        
+(function(){
+    
+async function fetchQuotes() {
+    const response = await fetch('quotes.json');
+    const data = await response.json();
+    
+    function randomQuote () {
+        return Math.floor(Math.random() * Math.floor(data.length))
     }
 
-    getQuote();
+    let randomQuoteNumber = randomQuote();
+    let accesQuote = data[randomQuoteNumber].quoteText;
+    let accesAuthor = data[randomQuoteNumber].quoteAuthor;
 
-    document.getElementById('next-quo').addEventListener('click', getQuote);
-  }());
-  
+    document.getElementById("quoteText").innerHTML = accesQuote;  
+    if (!accesAuthor == 0) {
+        document.getElementById("quoteAuthor").innerHTML = "&mdash; " + accesAuthor;
+    } else {
+        document.getElementById("quoteAuthor").innerHTML = "&mdash; " + "Unknown Author";     
+    }  
+}
+
+fetchQuotes();
+document.getElementById("next-quo").addEventListener('click', fetchQuotes);
+
+}())
