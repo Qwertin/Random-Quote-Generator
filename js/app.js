@@ -16,7 +16,7 @@ async function fetchQuotes() {
     if (!accesAuthor == 0) {
         document.getElementById("quoteAuthor").innerHTML = "&mdash; " + accesAuthor;
     } else {
-        document.getElementById("quoteAuthor").innerHTML = "&mdash; " + "Unknown Author";     
+        document.getElementById("quoteAuthor").innerHTML = "&mdash; " + "Unknown Author ";     
     }  
 }
 
